@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="styles.css")
+    title Resultados del Museo
+
+  body
+    .grid
+      each object in objects
+        .card
+          img(src=object.primaryImage || '/ruta/a/imagen-predeterminada.jpg', alt=object.title || 'Sin título')
+          .date Fecha: #{object.objectDate || 'Desconocida'}
+          h3= object.title || 'Sin título'
+          p Cultura: #{object.culture || 'Desconocida'}
+          p Dinastía: #{object.dynasty || 'Desconocida'}
+          if object.objectID
+            a.ver-mas(href="#", data-object-id=object.objectID) Ver más
+
+    // Botón de cierre para la paginación
+    button#close-pagination(type="button", class="close-btn") Cerrar Paginación
+
+    #modal-imagen.modal(style="display: none;")
+      .modal-content
+        span.close-modal &times;
+        img#modal-image(src="")
+        .contenedor-imagenes-adicionales
+
+    .pagination
+      if currentPage > 1
+        button.btn#prev-page(type="button", onclick=`window.location.href='/search?page=${currentPage - 1}&departmentId=${departmentId}&keyword=${keyword}&location=${location}'`) Anterior
+      span Página #{currentPage} de #{totalPages}
+      if currentPage < totalPages
+        button.btn#next-page(type="button", onclick=`window.location.href='/search?page=${currentPage + 1}&departmentId=${departmentId}&keyword=${keyword}&location=${location}'`) Siguiente
+
+    script(src='funciones.js')

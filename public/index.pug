@@ -1,0 +1,31 @@
+doctype html  
+html(lang="en")  
+head  
+    meta(charset="UTF-8")  
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")  
+    title Museo Metropolitano 
+    link(rel="stylesheet" href="styles.css")  
+body  
+    .background-images  
+        img#backgroundImage(src='pictures/photo-1501270067467-8298cce1babb.jpeg', alt='Fondo')  
+    h1.text-center Museo Metropolitano de Arte Nueva York  
+   
+        form(action="/search" method="get")  
+            label(for="departmentId") Departamento:  
+            select(name="departmentId" id="departmentId")  
+                option(value="") Selecciona un departamento  
+                each departamento in departments  
+                    option(value=departamento.departmentId) #{departamento.displayName}  
+            
+            label(for="keyword", class="me-1") Palabra clave:  
+            input(type="text" name='keyword' id="keyword" placeholder="Buscar...")  
+            
+            label(for="location", class="me-1") Localización:  
+            input(type="text" name='location' id="geoLocation" placeholder="Ej. France")  
+            
+            button.btn.btn-primary(type="submit") Buscar  
+            
+    script(src="funciones.js")
+    
+
+
